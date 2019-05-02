@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reservz</title>
+</head>
+<body>
+	<h1 class="head">Get Ready to Learn..</h1>
+	<p>here you can share your ideas..</p>
+	<a href="https://www.w3schools.com">This is a link</a>
+	<br/>
+	{% if messages %}
+		{% for i in messages %}
+		   <div class="alert alert-primary alert-dismissible" role="alert"> {{i}}
+		   		<button class="close" data-dismiss="alert">
+    				<small><sup>x</sup></small>
+  				</button>
+		   </div>
+		{% endfor %}
+	{% endif%}
+	<br/>
+
+
+	<table class="table table-bordered">
+	{% if all_items%}
+		
+		{% for i in all_items %}
+
+
+			{% if i.compleated %}
+				<tr class="table-secondary"> 
+					<td class="striker"><a href="{% url 'edit' i.id %}">{{i.item}}</a></td>
+					<td><center><a href="{% url 'cross' i.id %}">uncross</a></center></td>
+					<td><center><a href="{% url 'delete' i.id %}">Delete</a></center></td>
+				</tr>
+
+			{% else %}
+				<tr>
+					<td><a href="{% url 'edit' i.id %}">{{i.item}}</a></td>
+					<td><center><a href="{% url 'cross_off' i.id%}">cross_off</a></center></td>
+					<td><center><a href="{% url 'delete' i.id %}">Delete</a></center></td>
+				</tr>
+			{% endif %}
+
+		{% endfor%}
+		
+	{% endif%}
+	</table>
+</body>
+</html>
+
+{% endblock %}
